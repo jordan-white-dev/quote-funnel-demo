@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import FunnelPage from '@/components/FunnelPage.vue'
 import { useRouter } from 'vue-router'
-import { SIDE_WINDOWS, useFunnelStore } from '@/stores/funnel'
+import { SIDE_WINDOWS, useFunnelStore, type ChipCount } from '@/stores/funnel'
 import CheckboxCard from '@/components/CheckboxCard.vue'
 import RadioCard from '@/components/RadioCard.vue'
 import SegmentedControl from '@/components/SegmentedControl.vue'
@@ -11,7 +11,7 @@ const router = useRouter()
 const store = useFunnelStore()
 
 const SIDES = ['driver', 'passenger'] as const
-const CHIP_OPTIONS = [
+const CHIP_OPTIONS: Array<{ label: string; value: ChipCount }> = [
   { label: '1', value: 1 },
   { label: '2', value: 2 },
   { label: '3', value: 3 },

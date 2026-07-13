@@ -9,6 +9,8 @@
   --color-accent-soft: #fdf0ee;
   --color-border: #c4c4c4;
   --color-focus: #0070d1;
+  --color-success: #1e7e34;
+  --color-success-soft: #e9f5ec;
 }
 
 body {

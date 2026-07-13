@@ -47,6 +47,8 @@ type ContactInformation = {
 // #endregion
 
 const ZIP_CODE_PATTERN = /^\d{5}(?:-\d{4})?$/
+const EMAIL_PATTERN = /^\S+@\S+\.\S+$/
+const isEmailPlausible = (email: string) => EMAIL_PATTERN.test(email)
 
 export const useFunnelStore = defineStore('funnel', () => {
   // #region Domain State
@@ -89,6 +91,7 @@ export const useFunnelStore = defineStore('funnel', () => {
       vehicle.year !== '' && vehicle.make !== '' && vehicle.model !== '' && vehicle.style !== '',
   )
   const isZipCodeValid = computed(() => ZIP_CODE_PATTERN.test(zipCode.value))
+  const isQuoteEmailPlausible = computed(() => isEmailPlausible(quoteEmail.value))
 
   // Damage
   const isWindshieldSectionSatisfied = computed(() => {
@@ -128,7 +131,7 @@ export const useFunnelStore = defineStore('funnel', () => {
     () =>
       contactInformation.firstName !== '' &&
       contactInformation.lastName !== '' &&
-      contactInformation.email.includes('@') &&
+      isEmailPlausible(contactInformation.email) &&
       contactInformation.phoneNumber.replace(/\D/g, '').length === 10,
   )
   const vehicleDisplayName = computed(() => `${vehicle.year} ${vehicle.make} ${vehicle.model}`)
@@ -210,6 +213,7 @@ export const useFunnelStore = defineStore('funnel', () => {
     contactInformation,
     isVehicleComplete,
     isZipCodeValid,
+    isQuoteEmailPlausible,
     isDamageSelectionComplete,
     isPlanComplete,
     isServiceScheduleComplete,
