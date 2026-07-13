@@ -18,7 +18,7 @@ const model = defineModel<T>({ required: true })
         :value="option.value"
         v-model="model"
       />
-      {{ option.value }}
+      {{ option.label }}
     </label>
   </div>
 </template>
