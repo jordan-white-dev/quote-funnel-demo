@@ -15,7 +15,7 @@ const isDevEnvironment = import.meta.env.DEV
     subtitle="Find your vehicle by entering the year, make, model and style."
     :can-continue="true"
     continue-button-label="Let's get started"
-    @continue-to-requested="router.push({ name: 'vehicle' })"
+    @continue-requested="router.push({ name: 'vehicle' })"
   >
     <button v-if="isDevEnvironment" type="button" @click="store.devFillOutProfile()">
       DEV: fill out profile

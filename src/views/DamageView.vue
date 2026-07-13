@@ -12,7 +12,7 @@ const store = useFunnelStore()
     title="What do you need fixed?"
     back-to-route="vehicle"
     :can-continue="store.isDamageSelectionComplete"
-    @continue-to-requested="router.push({ name: 'zip' })"
+    @continue-requested="router.push({ name: 'zip' })"
   >
     <p>TODO: Damage form</p>
   </FunnelPage>

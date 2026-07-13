@@ -12,7 +12,7 @@ const store = useFunnelStore()
     :title="store.vehicleDisplayName"
     back-to-route="damage"
     :can-continue="store.isZipCodeValid"
-    @continue-to-requested="router.push({ name: 'quote' })"
+    @continue-requested="router.push({ name: 'quote' })"
   >
     <p>TODO: Zip form</p>
   </FunnelPage>

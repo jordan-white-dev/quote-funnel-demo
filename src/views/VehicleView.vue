@@ -13,7 +13,7 @@ const store = useFunnelStore()
     subtitle="Find your vehicle by entering the year, make, model and style."
     back-to-route="landing"
     :can-continue="store.isVehicleComplete"
-    @continue-to-requested="router.push({ name: 'damage' })"
+    @continue-requested="router.push({ name: 'damage' })"
   >
     <p>TODO: Vehicle form</p>
   </FunnelPage>

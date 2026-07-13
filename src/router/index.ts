@@ -83,14 +83,12 @@ router.beforeEach((to) => {
   const frontierGateIndex = funnelGates.findIndex((funnelGate) => !funnelGate.isComplete(store))
   const targetGateIndex = funnelGates.findIndex((funnelGate) => to.name === funnelGate.name)
 
-  if (targetGateIndex > frontierGateIndex) {
-    if (funnelGates[frontierGateIndex] === undefined) {
-      throw new Error('No frontier gate found')
-    }
+  if (funnelGates[frontierGateIndex] === undefined) {
+    return true
+  }
 
-    return {
-      name: funnelGates[frontierGateIndex].name,
-    }
+  if (targetGateIndex > frontierGateIndex) {
+    return { name: funnelGates[frontierGateIndex].name }
   }
 
   return true

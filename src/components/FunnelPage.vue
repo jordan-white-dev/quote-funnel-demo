@@ -9,7 +9,7 @@ type Props = {
 
 withDefaults(defineProps<Props>(), { continueButtonLabel: 'Continue' })
 
-const emit = defineEmits<{ continueToRequested: [] }>()
+const emit = defineEmits<{ continueRequested: [] }>()
 </script>
 
 <template>
@@ -23,7 +23,7 @@ const emit = defineEmits<{ continueToRequested: [] }>()
         class="continue-button"
         type="button"
         :disabled="!canContinue"
-        @click="emit('continueToRequested')"
+        @click="emit('continueRequested')"
       >
         {{ continueButtonLabel }}
       </button>

@@ -11,7 +11,7 @@ const router = useRouter()
     back-to-route="contact"
     :can-continue="false"
     continue-button-label="Submit"
-    @continue-to-requested="router.push({ name: 'landing' })"
+    @continue-requested="router.push({ name: 'landing' })"
   >
     <p>TODO: Review & submit</p>
     <RouterLink :to="{ name: 'landing' }">DEV: start over</RouterLink>

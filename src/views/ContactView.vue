@@ -13,7 +13,7 @@ const store = useFunnelStore()
     subtitle="We'll send you an appointment confirmation and follow-up details."
     back-to-route="schedule"
     :can-continue="store.isZipCodeValid"
-    @continue-to-requested="router.push({ name: 'review' })"
+    @continue-requested="router.push({ name: 'review' })"
   >
     <p>TODO: Contact information form</p>
   </FunnelPage>
