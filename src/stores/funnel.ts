@@ -108,6 +108,23 @@ export const useFunnelStore = defineStore('funnel', () => {
   const vehicleDisplayName = computed(() => `${vehicle.year} ${vehicle.make} ${vehicle.model}`)
   // #endregion
 
+  // #region Actions
+  function selectYear(year: string) {
+    vehicle.year = year
+    vehicle.make = ''
+    vehicle.model = ''
+    vehicle.style = ''
+  }
+  function selectMake(make: string) {
+    vehicle.make = make
+    vehicle.model = ''
+    vehicle.style = ''
+  }
+  function selectModel(model: string) {
+    vehicle.model = model
+    vehicle.style = ''
+  }
+
   function devFillOutProfile() {
     Object.assign(vehicle, { year: '2024', make: 'Honda', model: 'Civic', style: 'LX' })
     Object.assign(damageState.windshield, { isChecked: true, repairAction: 'repair', chipCount: 2 })
@@ -126,6 +143,7 @@ export const useFunnelStore = defineStore('funnel', () => {
       allowsTextUpdates: false,
     })
   }
+  // #endregion
 
   return {
     vehicle,
@@ -142,6 +160,9 @@ export const useFunnelStore = defineStore('funnel', () => {
     isServiceScheduleComplete,
     isContactInformationComplete,
     vehicleDisplayName,
+    selectYear,
+    selectMake,
+    selectModel,
     devFillOutProfile,
   }
 })
