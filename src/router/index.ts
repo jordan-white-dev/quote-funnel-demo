@@ -37,9 +37,9 @@ const router = createRouter({
       meta: { step: 1 },
     },
     {
-      path: '/quote',
-      name: 'quote',
-      component: () => import('@/views/QuoteView.vue'),
+      path: '/plan',
+      name: 'plan',
+      component: () => import('@/views/PlanView.vue'),
       meta: { step: 2 },
     },
     {
@@ -67,7 +67,7 @@ const funnelGates: { name: string; isComplete: (store: FunnelStore) => boolean }
   { name: 'vehicle', isComplete: (store) => store.isVehicleComplete },
   { name: 'damage', isComplete: (store) => store.isDamageSelectionComplete },
   { name: 'zip', isComplete: (store) => store.isZipCodeValid },
-  { name: 'quote', isComplete: (store) => store.isPlanComplete },
+  { name: 'plan', isComplete: (store) => store.isPlanComplete },
   { name: 'schedule', isComplete: (store) => store.isServiceScheduleComplete },
   { name: 'contact', isComplete: (store) => store.isContactInformationComplete },
   { name: 'review', isComplete: () => false },

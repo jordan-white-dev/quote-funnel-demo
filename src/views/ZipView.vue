@@ -26,7 +26,7 @@ onBeforeUnmount(() => clearTimeout(sendTimerId))
     :title="store.vehicleDisplayName"
     back-to-route="damage"
     :can-continue="store.isZipCodeValid"
-    @continue-requested="router.push({ name: 'quote' })"
+    @continue-requested="router.push({ name: 'plan' })"
   >
     <BaseInput
       class="zip-code-input"

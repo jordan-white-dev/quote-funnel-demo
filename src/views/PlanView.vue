@@ -14,6 +14,6 @@ const store = useFunnelStore()
     :can-continue="store.isZipCodeValid"
     @continue-requested="router.push({ name: 'schedule' })"
   >
-    <p>TODO: Quote form</p>
+    <p>TODO: Plan form</p>
   </FunnelPage>
 </template>

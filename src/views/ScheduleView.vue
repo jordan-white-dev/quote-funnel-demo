@@ -10,7 +10,7 @@ const store = useFunnelStore()
 <template>
   <FunnelPage
     title="We'll come to you for free!"
-    back-to-route="quote"
+    back-to-route="plan"
     :can-continue="store.isZipCodeValid"
     @continue-requested="router.push({ name: 'contact' })"
   >
