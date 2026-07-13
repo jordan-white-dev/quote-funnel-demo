@@ -10,7 +10,9 @@ type Vehicle = {
 }
 export type RepairAction = 'replace' | 'repair'
 export type ChipCount = 1 | 2 | 3
-export type SideWindow = 'vent glass' | 'front door' | 'back door' | 'quarter panel'
+export type SideWindow = 'Vent glass' | 'Front door' | 'Back door' | 'Quarter panel'
+export const SIDE_WINDOWS: SideWindow[] = ['Vent glass', 'Front door', 'Back door', 'Quarter panel']
+
 type DamageState = {
   windshield: {
     isChecked: boolean
@@ -87,13 +89,37 @@ export const useFunnelStore = defineStore('funnel', () => {
       vehicle.year !== '' && vehicle.make !== '' && vehicle.model !== '' && vehicle.style !== '',
   )
   const isZipCodeValid = computed(() => ZIP_CODE_PATTERN.test(zipCode.value))
-  // TODO: nested follow-up rules
+
+  // Damage
+  const isWindshieldSectionSatisfied = computed(() => {
+    const { isChecked, repairAction, chipCount } = damageState.windshield
+
+    if (!isChecked) return true
+    if (repairAction === '') return false
+
+    const isSatisfied = repairAction === 'replace' || chipCount > 0
+    return isSatisfied
+  })
+  const isSideSatisfied = (side: { isChecked: boolean; windows: SideWindow[] }) =>
+    !side.isChecked || side.windows.length > 0
+  const isSideWindowSectionSatisfied = computed(() => {
+    const { isChecked, driver, passenger } = damageState.sideWindow
+
+    if (!isChecked) return true
+    if (!driver.isChecked && !passenger.isChecked) return false
+
+    const isSatisfied = isSideSatisfied(driver) && isSideSatisfied(passenger)
+    return isSatisfied
+  })
   const isDamageSelectionComplete = computed(
     () =>
-      damageState.windshield.isChecked ||
-      damageState.sideWindow.isChecked ||
-      damageState.rearWindow.isChecked,
+      (damageState.windshield.isChecked ||
+        damageState.sideWindow.isChecked ||
+        damageState.rearWindow.isChecked) &&
+      isWindshieldSectionSatisfied.value &&
+      isSideWindowSectionSatisfied.value,
   )
+
   const isPlanComplete = computed(() => plan.planTier !== '')
   const isServiceScheduleComplete = computed(
     () => serviceSchedule.serviceLocation !== '' && serviceSchedule.slot !== '',
@@ -109,6 +135,8 @@ export const useFunnelStore = defineStore('funnel', () => {
   // #endregion
 
   // #region Actions
+
+  // Vehicle
   function selectYear(year: string) {
     vehicle.year = year
     vehicle.make = ''
@@ -125,6 +153,33 @@ export const useFunnelStore = defineStore('funnel', () => {
     vehicle.style = ''
   }
 
+  // Damage
+  function setWindshieldChecked(isChecked: boolean) {
+    damageState.windshield.isChecked = isChecked
+    if (!isChecked) {
+      damageState.windshield.repairAction = ''
+      damageState.windshield.chipCount = 0
+    }
+  }
+  function setWindshieldRepairAction(repairAction: '' | RepairAction) {
+    damageState.windshield.repairAction = repairAction
+    damageState.windshield.chipCount = 0
+  }
+  function setSideChecked(side: 'driver' | 'passenger', isChecked: boolean) {
+    damageState.sideWindow[side].isChecked = isChecked
+    if (!isChecked) {
+      damageState.sideWindow[side].windows = []
+    }
+  }
+  function setSideWindowChecked(isChecked: boolean) {
+    damageState.sideWindow.isChecked = isChecked
+    if (!isChecked) {
+      setSideChecked('driver', false)
+      setSideChecked('passenger', false)
+    }
+  }
+
+  // Dev
   function devFillOutProfile() {
     Object.assign(vehicle, { year: '2024', make: 'Honda', model: 'Civic', style: 'LX' })
     Object.assign(damageState.windshield, { isChecked: true, repairAction: 'repair', chipCount: 2 })
@@ -163,6 +218,10 @@ export const useFunnelStore = defineStore('funnel', () => {
     selectYear,
     selectMake,
     selectModel,
+    setWindshieldChecked,
+    setWindshieldRepairAction,
+    setSideChecked,
+    setSideWindowChecked,
     devFillOutProfile,
   }
 })
