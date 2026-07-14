@@ -60,6 +60,8 @@ export const formatUSD = (amount: number) => usdFormatter.format(amount)
 const REPAIR_SUPPLIES_PRICE = 7.99
 const SALES_TAX_RATE = 0.08
 
+export const STORE_ADDRESS = '1234 Auto Glass Way, Columbus, OH 43235'
+
 export const useFunnelStore = defineStore('funnel', () => {
   // #region Domain State
   const vehicle = reactive<Vehicle>({ year: '', make: '', model: '', style: '' })
@@ -199,6 +201,12 @@ export const useFunnelStore = defineStore('funnel', () => {
     }
   }
 
+  function setServiceLocation(serviceLocation: '' | ServiceLocation) {
+    if (serviceLocation === serviceSchedule.serviceLocation) return
+    serviceSchedule.serviceLocation = serviceLocation
+    serviceSchedule.slot = ''
+  }
+
   // Dev
   function devFillOutProfile() {
     Object.assign(vehicle, { year: '2024', make: 'Honda', model: 'Civic', style: 'LX' })
@@ -233,6 +241,10 @@ export const useFunnelStore = defineStore('funnel', () => {
     isQuoteEmailPlausible,
     isDamageSelectionComplete,
     isPlanComplete,
+    selectedTierPrice,
+    subtotal,
+    salesTax,
+    total,
     isServiceScheduleComplete,
     isContactInformationComplete,
     vehicleDisplayName,
@@ -243,6 +255,7 @@ export const useFunnelStore = defineStore('funnel', () => {
     setWindshieldRepairAction,
     setSideChecked,
     setSideWindowChecked,
+    setServiceLocation,
     devFillOutProfile,
   }
 })

@@ -14,6 +14,7 @@ const emit = defineEmits<{ continueRequested: [] }>()
 
 <template>
   <main>
+    <slot name="banner" />
     <h1>{{ title }}</h1>
     <p v-if="subtitle">{{ subtitle }}</p>
     <slot />
