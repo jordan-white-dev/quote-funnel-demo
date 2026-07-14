@@ -16,7 +16,7 @@ const emit = defineEmits<{ continueRequested: [] }>()
 <template>
   <main class="page-column">
     <slot name="banner" />
-    <h1>{{ title }}</h1>
+    <h1 class="page-title">{{ title }}</h1>
     <p v-if="subtitle">{{ subtitle }}</p>
     <slot />
     <div class="buttons-footer" :class="{ 'buttons-footer--stacked': fullWidthContinue }">
@@ -34,6 +34,10 @@ const emit = defineEmits<{ continueRequested: [] }>()
 </template>
 
 <style scoped>
+.page-title {
+  font-size: 1.375rem;
+}
+
 .buttons-footer {
   display: flex;
   align-items: center;
