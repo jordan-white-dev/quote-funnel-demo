@@ -37,7 +37,7 @@ const isSubmitted = ref(false)
   >
     <hr />
 
-    <BaseAccordion default-open>
+    <BaseAccordion>
       <template #summary>Appointment details</template>
 
       <div class="detail-block">
@@ -84,7 +84,7 @@ const isSubmitted = ref(false)
 
     <hr />
 
-    <BaseAccordion default-open>
+    <BaseAccordion>
       <template #summary>Order details</template>
 
       <p class="line-item">

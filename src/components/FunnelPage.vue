@@ -6,6 +6,7 @@ type Props = {
   canContinue: boolean
   continueButtonLabel?: string
   fullWidthContinue?: boolean
+  centeredHeader?: boolean
 }
 
 withDefaults(defineProps<Props>(), { continueButtonLabel: 'Continue' })
@@ -16,8 +17,8 @@ const emit = defineEmits<{ continueRequested: [] }>()
 <template>
   <main class="page-column">
     <slot name="banner" />
-    <h1 class="page-title">{{ title }}</h1>
-    <p v-if="subtitle">{{ subtitle }}</p>
+    <h1 class="page-title" :class="{ centered: centeredHeader }">{{ title }}</h1>
+    <p v-if="subtitle" :class="{ centered: centeredHeader }">{{ subtitle }}</p>
     <slot />
     <div class="buttons-footer" :class="{ 'buttons-footer--stacked': fullWidthContinue }">
       <RouterLink class="back-link" v-if="backToRoute" :to="{ name: backToRoute }">Back</RouterLink>
@@ -34,6 +35,10 @@ const emit = defineEmits<{ continueRequested: [] }>()
 </template>
 
 <style scoped>
+.centered {
+  text-align: center;
+}
+
 .page-title {
   font-size: 1.375rem;
 }
@@ -60,6 +65,8 @@ const emit = defineEmits<{ continueRequested: [] }>()
 
 .back-link {
   color: #0070d1;
+  font-weight: 600;
+  text-decoration: none;
 }
 
 .continue-button {

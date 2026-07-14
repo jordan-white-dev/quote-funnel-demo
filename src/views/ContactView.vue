@@ -37,6 +37,7 @@ const store = useFunnelStore()
         label="Phone number"
         type="tel"
         autocomplete="tel"
+        placeholder="###-###-####"
         v-model="store.contactInformation.phoneNumber"
       />
     </div>

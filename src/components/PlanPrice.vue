@@ -10,7 +10,9 @@ const insuranceDisplay = computed(() => formatUSD(props.price / 2))
 
 <template>
   <p v-if="paymentMethod === 'own'" class="price-own">
-    <span class="price-installment">{{ installmentDisplay }} in 4 interest-free payments</span>
+    <span class="price-installment">
+      <span class="price-amount">{{ installmentDisplay }}</span> in 4 interest-free payments
+    </span>
     <span class="price-single"
       >or {{ formatUSD(price) }} <s v-if="wasPrice">{{ formatUSD(wasPrice) }}</s> in single
       payment</span
@@ -28,10 +30,15 @@ const insuranceDisplay = computed(() => formatUSD(props.price / 2))
 }
 
 .price-installment {
+  font-size: 1rem;
+  color: #555;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.price-amount {
   color: var(--color-success);
   font-size: 1.375rem;
-  font-weight: 700;
-  line-height: 1.2;
 }
 
 .price-single {

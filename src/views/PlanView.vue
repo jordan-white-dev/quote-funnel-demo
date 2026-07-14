@@ -23,6 +23,7 @@ const PAYMENT_OPTIONS: Array<{ label: string; value: PaymentMethod }> = [
     back-to-route="zip"
     :can-continue="store.isPlanComplete"
     @continue-requested="router.push({ name: 'schedule' })"
+    centered-header
   >
     <div class="payment-method">
       <SegmentedControl
@@ -75,6 +76,7 @@ const PAYMENT_OPTIONS: Array<{ label: string; value: PaymentMethod }> = [
 <style scoped>
 .payment-method {
   max-width: 26rem;
+  margin-inline: auto;
   margin-block: 1.5rem;
 }
 
@@ -119,6 +121,7 @@ const PAYMENT_OPTIONS: Array<{ label: string; value: PaymentMethod }> = [
 }
 
 .plan-special {
+  align-self: flex-start;
   padding: 0.375rem 0.5rem;
   border-radius: 0.375rem;
   background: var(--color-success-soft);
@@ -151,6 +154,7 @@ const PAYMENT_OPTIONS: Array<{ label: string; value: PaymentMethod }> = [
   margin: 0;
   font-weight: 700;
   line-height: 1.25;
+  flex-shrink: 0;
 }
 
 .pay-later-copy {

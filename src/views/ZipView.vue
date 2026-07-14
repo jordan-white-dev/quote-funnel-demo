@@ -78,18 +78,21 @@ onBeforeUnmount(() => clearTimeout(sendTimerId))
 }
 
 .email-icon {
-  font-size: 2rem;
+  font-size: 3rem;
   line-height: 1;
+  text-align: center;
 }
 
 h2 {
   margin: 0;
   font-size: 1.125rem;
+  text-align: center;
 }
 
 .email-subtitle {
   margin: 0;
   color: #555;
+  text-align: center;
 }
 
 .send-button {

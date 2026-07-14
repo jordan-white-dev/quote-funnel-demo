@@ -132,6 +132,7 @@ const CHIP_OPTIONS: Array<{ label: string; value: ChipCount }> = [
 .side-damage-row {
   display: flex;
   flex-direction: row;
+  gap: 1rem;
 }
 
 section {
