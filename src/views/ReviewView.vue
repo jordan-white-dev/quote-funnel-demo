@@ -22,7 +22,7 @@ const isSubmitted = ref(false)
   <main v-if="isSubmitted" class="success page-column">
     <h1>You're all set! ✅</h1>
     <p>We'll see you {{ store.serviceSchedule.slot }}.</p>
-    <RouterLink class="home-link" :to="{ name: 'landing' }">Back to home</RouterLink>
+    <RouterLink class="home-link" :to="{ name: 'vehicle' }">Back to start</RouterLink>
   </main>
 
   <FunnelPage

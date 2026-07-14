@@ -231,26 +231,6 @@ export const useFunnelStore = defineStore('funnel', () => {
     serviceSchedule.serviceLocation = serviceLocation
     serviceSchedule.slot = ''
   }
-
-  // Dev
-  function devFillOutProfile() {
-    Object.assign(vehicle, { year: '2024', make: 'Honda', model: 'Civic', style: 'LX' })
-    Object.assign(damageState.windshield, { isChecked: true, repairAction: 'repair', chipCount: 2 })
-    zipCode.value = '43235'
-    quoteEmail.value = 'jordan@example.com'
-    Object.assign(plan, { paymentMethod: 'own', planTier: 'standard' })
-    Object.assign(serviceSchedule, {
-      serviceLocation: 'store',
-      slot: 'Thursday, July 16, 2026 at 1:30 PM',
-    })
-    Object.assign(contactInformation, {
-      firstName: 'Jordan',
-      lastName: 'White',
-      email: 'jordan@example.com',
-      phoneNumber: '6145550100',
-      allowsTextUpdates: false,
-    })
-  }
   // #endregion
 
   return {
@@ -283,6 +263,5 @@ export const useFunnelStore = defineStore('funnel', () => {
     setSideChecked,
     setSideWindowChecked,
     setServiceLocation,
-    devFillOutProfile,
   }
 })

@@ -1,4 +1,4 @@
-import LandingView from '@/views/LandingView.vue'
+import VehicleView from '@/views/VehicleView.vue'
 import { createRouter, createWebHistory } from 'vue-router'
 import { useFunnelStore } from '@/stores/funnel'
 
@@ -15,13 +15,12 @@ const router = createRouter({
   routes: [
     {
       path: '/',
-      name: 'landing',
-      component: LandingView,
+      redirect: { name: 'vehicle' },
     },
     {
       path: '/vehicle',
       name: 'vehicle',
-      component: () => import('@/views/VehicleView.vue'),
+      component: VehicleView,
       meta: { step: 1 },
     },
     {

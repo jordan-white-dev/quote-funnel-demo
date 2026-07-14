@@ -21,7 +21,6 @@ const styleOptions = computed(() =>
   <FunnelPage
     title="Tell us about your vehicle"
     subtitle="Find your vehicle by entering the year, make, model and style."
-    back-to-route="landing"
     :can-continue="store.isVehicleComplete"
     @continue-requested="router.push({ name: 'damage' })"
   >
