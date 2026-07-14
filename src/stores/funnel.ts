@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia'
 import { computed, reactive, ref } from 'vue'
+import { PLANS } from '@/data/plans'
 
 // #region Types
 type Vehicle = {
@@ -49,6 +50,15 @@ type ContactInformation = {
 const ZIP_CODE_PATTERN = /^\d{5}(?:-\d{4})?$/
 const EMAIL_PATTERN = /^\S+@\S+\.\S+$/
 const isEmailPlausible = (email: string) => EMAIL_PATTERN.test(email)
+
+const usdFormatter = new Intl.NumberFormat('en-US', {
+  style: 'currency',
+  currency: 'USD',
+})
+export const formatUSD = (amount: number) => usdFormatter.format(amount)
+
+const REPAIR_SUPPLIES_PRICE = 7.99
+const SALES_TAX_RATE = 0.08
 
 export const useFunnelStore = defineStore('funnel', () => {
   // #region Domain State
@@ -124,6 +134,13 @@ export const useFunnelStore = defineStore('funnel', () => {
   )
 
   const isPlanComplete = computed(() => plan.planTier !== '')
+  const selectedTierPrice = computed(
+    () => PLANS.find((planDefinition) => planDefinition.id === plan.planTier)?.price ?? 0,
+  )
+  const subtotal = computed(() => selectedTierPrice.value + REPAIR_SUPPLIES_PRICE)
+  const salesTax = computed(() => subtotal.value * SALES_TAX_RATE)
+  const total = computed(() => subtotal.value + salesTax.value)
+
   const isServiceScheduleComplete = computed(
     () => serviceSchedule.serviceLocation !== '' && serviceSchedule.slot !== '',
   )
