@@ -57,7 +57,7 @@ const usdFormatter = new Intl.NumberFormat('en-US', {
 })
 export const formatUSD = (amount: number) => usdFormatter.format(amount)
 
-const REPAIR_SUPPLIES_PRICE = 7.99
+export const REPAIR_SUPPLIES_PRICE = 7.99
 const SALES_TAX_RATE = 0.08
 
 export const STORE_ADDRESS = '1234 Auto Glass Way, Columbus, OH 43235'
@@ -134,10 +134,35 @@ export const useFunnelStore = defineStore('funnel', () => {
       isWindshieldSectionSatisfied.value &&
       isSideWindowSectionSatisfied.value,
   )
+  const damageSummary = computed(() => {
+    const parts: string[] = []
+    const { windshield, sideWindow, rearWindow } = damageState
+
+    if (windshield.isChecked) {
+      parts.push(
+        windshield.repairAction === 'repair'
+          ? `repair ${windshield.chipCount} chip${windshield.chipCount === 1 ? '' : 's'} in the windshield`
+          : 'replace the windshield',
+      )
+    }
+    if (sideWindow.isChecked) {
+      const windowCount = sideWindow.driver.windows.length + sideWindow.passenger.windows.length
+      parts.push(`fix ${windowCount} side window${windowCount === 1 ? '' : 's'}`)
+    }
+    if (rearWindow.isChecked) {
+      parts.push('replace the rear window')
+    }
+
+    const joined = parts.join(' and ')
+    return joined.charAt(0).toUpperCase() + joined.slice(1)
+  })
 
   const isPlanComplete = computed(() => plan.planTier !== '')
   const selectedTierPrice = computed(
     () => PLANS.find((planDefinition) => planDefinition.id === plan.planTier)?.price ?? 0,
+  )
+  const selectedTierLabel = computed(
+    () => PLANS.find((planDefinition) => planDefinition.id === plan.planTier)?.label ?? '',
   )
   const subtotal = computed(() => selectedTierPrice.value + REPAIR_SUPPLIES_PRICE)
   const salesTax = computed(() => subtotal.value * SALES_TAX_RATE)
@@ -248,6 +273,8 @@ export const useFunnelStore = defineStore('funnel', () => {
     isServiceScheduleComplete,
     isContactInformationComplete,
     vehicleDisplayName,
+    selectedTierLabel,
+    damageSummary,
     selectYear,
     selectMake,
     selectModel,
