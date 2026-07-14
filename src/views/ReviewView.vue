@@ -19,7 +19,7 @@ const isSubmitted = ref(false)
 </script>
 
 <template>
-  <main v-if="isSubmitted" class="success">
+  <main v-if="isSubmitted" class="success page-column">
     <h1>You're all set! ✅</h1>
     <p>We'll see you {{ store.serviceSchedule.slot }}.</p>
     <RouterLink class="home-link" :to="{ name: 'landing' }">Back to home</RouterLink>
@@ -33,6 +33,7 @@ const isSubmitted = ref(false)
     :can-continue="paymentChoice !== ''"
     continue-button-label="Submit"
     @continue-requested="isSubmitted = true"
+    full-width-continue
   >
     <hr />
 
@@ -164,7 +165,6 @@ hr {
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
-  max-width: 26rem;
   margin-block: 1.5rem;
 }
 

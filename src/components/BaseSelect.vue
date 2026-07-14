@@ -19,7 +19,6 @@ const model = defineModel<string>({ required: true })
   flex-direction: column;
   gap: 0.375rem;
   margin-bottom: 1rem;
-  max-width: 24rem;
 }
 
 .base-select-label {

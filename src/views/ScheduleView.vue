@@ -110,7 +110,6 @@ const TIME_SLOTS = [
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
-  max-width: 26rem;
 }
 
 section {

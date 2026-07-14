@@ -18,7 +18,7 @@ const model = defineModel<boolean>({ required: true })
   align-items: center;
   gap: 0.5rem;
   padding: 1.25rem 1rem;
-  width: 9rem;
+  flex: 1;
   border: 1px solid var(--color-border);
   border-radius: 0.5rem;
   cursor: pointer;

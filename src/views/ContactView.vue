@@ -58,7 +58,6 @@ const store = useFunnelStore()
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  max-width: 26rem;
   margin-block: 1.5rem;
 }
 

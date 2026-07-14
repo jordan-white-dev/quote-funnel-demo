@@ -29,7 +29,6 @@ onBeforeUnmount(() => clearTimeout(sendTimerId))
     @continue-requested="router.push({ name: 'plan' })"
   >
     <BaseInput
-      class="zip-code-input"
       label="Service ZIP"
       inputmode="numeric"
       autocomplete="postal-code"
@@ -68,15 +67,10 @@ onBeforeUnmount(() => clearTimeout(sendTimerId))
 </template>
 
 <style scoped>
-:deep(.zip-code-input) {
-  max-width: 12rem;
-}
-
 .email-capture {
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
-  max-width: 26rem;
   margin-block: 2rem;
   padding: 1.5rem;
   border: 1px solid var(--color-border);

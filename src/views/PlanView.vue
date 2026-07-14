@@ -79,10 +79,24 @@ const PAYMENT_OPTIONS: Array<{ label: string; value: PaymentMethod }> = [
 }
 
 .plan-row {
+  --plan-row-width: min(60rem, 100vw - 3rem);
   display: flex;
   gap: 1rem;
   align-items: stretch;
   margin-block: 1.5rem;
+  width: var(--plan-row-width);
+  margin-inline: calc((100% - var(--plan-row-width)) / 2);
+}
+
+@media (max-width: 45rem) {
+  .plan-row {
+    --plan-row-width: 100%;
+    flex-direction: column;
+  }
+
+  .plan-row .radio-card {
+    flex: none;
+  }
 }
 
 .plan-row .radio-card {
